@@ -7,7 +7,7 @@ VERSION=prod # e.g. dev, test, demo, prod
 ./deploy/az_create_k8_cluster $VERSION
 ```
 
-## Activate K8 Cluster
+## Activate k8 Cluster
 ```
 # Activate 'prod'
 ./deploy/az_k8_activate prod
@@ -42,7 +42,7 @@ VERSION=1.0 make test_k8
 
 ## Deploy
 ```
-# Creeate service (Load Balancer) for deployment
+# Create service (Load Balancer) for deployment
 make service
 
 # Deploy tag:latest to active k8 cluster
