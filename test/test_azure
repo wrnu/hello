@@ -1,0 +1,31 @@
+#!/bin/bash
+
+parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+
+if [ ! -z "$VERSION" ]; then
+    echo "Testing version $VERSION"
+    uuid=$(uuidgen)
+    cat $parent_path/../deploy/hello-deployment.yml | sed -e 's/latest/$VERSION/g' > /tmp/$uuid.yml
+    kubectl replace -f /tmp/$uuid.yml
+    rm /tmp/$uuid.yml
+else
+    kubectl replace -f $parent_path/../deploy/hello-deployment.yml
+fi
+
+HELLO_IP=$(kubectl get services/hello -o json | jq -r '.status.loadBalancer.ingress[].ip')
+
+# TEST GET
+result=$(curl -s http://$HELLO_IP)
+if [[ $result == "Hello world!" ]]; then
+  echo GET: PASS
+else
+  echo GET: FAIL
+fi
+
+# TEST POST
+result=$(curl -s -X POST --data "Testy McTestface" http://$HELLO_IP)
+if [[ $result == "Hello Testy McTestface world!" ]]; then
+  echo POST: PASS
+else
+  echo POST: FAIL
+fi

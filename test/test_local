@@ -1,0 +1,24 @@
+#!/bin/bash
+
+echo "Testing version $VERSION"
+
+docker run --name $NAME -p 80:80 -d $NAME:$VERSION 2>&1 > /dev/null
+
+# Test GET
+result=$(curl -s http://localhost)
+if [[ $result == "Hello world!" ]]; then
+  echo GET: PASS
+else
+  echo GET: FAIL
+fi
+
+# Test POST
+result=$(curl -s -X POST --data "Warren" http://localhost)
+if [[ $result == "Hello Warren world!" ]]; then
+  echo POST: PASS
+else
+  echo POST: FAIL
+fi
+
+docker stop $NAME 2>&1 > /dev/null
+docker rm $NAME 2>&1 > /dev/null

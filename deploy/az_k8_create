@@ -1,0 +1,22 @@
+#!/bin/bash
+
+VERSION=$1
+
+MASTER_COUNT=1
+AGENT_COUNT=2
+AGENT_VM_SIZE=Standard_DS1_v2
+
+RESOURCE_GROUP=hello
+LOCATION=westus
+
+az group create --name=$RESOURCE_GROUP --location=$LOCATION
+
+DNS_PREFIX=hello-$VERSION
+CLUSTER_NAME=hello-$VERSION
+
+az acs create --orchestrator-type=kubernetes --resource-group $RESOURCE_GROUP  \
+              --name=$CLUSTER_NAME --dns-prefix=$DNS_PREFIX --generate-ssh-keys \
+              --agent-vm-size $AGENT_VM_SIZE --agent-count $AGENT_COUNT  \
+              --master-count $MASTER_COUNT
+
+az acs kubernetes get-credentials --resource-group=$RESOURCE_GROUP --name=$CLUSTER_NAME

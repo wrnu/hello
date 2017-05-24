@@ -1,0 +1,13 @@
+#!/bin/bash
+
+parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+
+if [ ! -z "$VERSION" ]; then
+    echo "Deploying version $VERSION"
+    uuid=$(uuidgen)
+    cat $parent_path/../deploy/hello-deployment.yml | sed -e 's/latest/$VERSION/g' > /tmp/$uuid.yml
+    kubectl replace -f /tmp/$uuid.yml
+    rm /tmp/$uuid.yml
+else
+    kubectl replace -f $parent_path/../deploy/hello-deployment.yml
+fi
