@@ -42,6 +42,9 @@ VERSION=1.0 make test_k8
 
 ## Deploy
 ```
+# Creeate service (Load Balancer) for deployment
+make service
+
 # Deploy tag:latest to active k8 cluster
 make deploy
 

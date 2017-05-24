@@ -23,6 +23,9 @@ tag:
 push:
 	docker push $(DOCKER_REGISTRY)/$(NAME):$(VERSION)
 
+service:
+	kubectl create -f deploy/hello-service.yml
+
 release: build tag push 
 
 deploy:
