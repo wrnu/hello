@@ -1,11 +1,11 @@
 NAME = hello
 VERSION ?= latest
-DOCKER_REGISTRY ?= docker.io#hellotest.azurecr.io
+DOCKER_REGISTRY ?= docker.io
 NS ?= wrnu
 
-.PHONY: all build test test_k8 tag push release deploy
+.PHONY: all build test test_k8 tag push service release deploy
 
-all: build
+all: release deploy
 
 default: build
 
