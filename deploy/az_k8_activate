@@ -2,7 +2,7 @@
 
 VERSION=$1
 
-RESOURCE_GROUP=hello
-CLUSTER_NAME=hello-$VERSION
+RESOURCE_GROUP=${RESOURCE_GROUP:-hello}
+CLUSTER_NAME=$RESOURCE_GROUP-$VERSION
 
 az acs kubernetes get-credentials --resource-group=$RESOURCE_GROUP --name=$CLUSTER_NAME
