@@ -1,0 +1,22 @@
+#!/bin/bash
+
+parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+
+action=create
+if kubectl get deploy | grep -q hello
+  then action=replace
+fi
+
+echo "Deploying version $VERSION"
+
+uuid=$(uuidgen)
+
+cat $parent_path/hello-deployment.yml | \
+sed -e "s/{{ registry }}/$DOCKER_REGISTRY/g" | \
+sed -e "s/{{ namespace }}/$NS/g" | \
+sed -e "s/{{ image }}/$NAME/g" | \
+sed -e "s/{{ version }}/$VERSION/g" > /tmp/$uuid.yml
+
+kubectl $action -f /tmp/$uuid.yml
+
+#rm /tmp/$uuid.yml

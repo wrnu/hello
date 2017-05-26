@@ -1,16 +1,16 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: hello
+  name: {{ image }}
 spec:
   replicas: 4
   template:
     metadata:
       labels:
-        run: hello
+        run: {{ image }}
     spec:
       containers:
       - name: hello
-        image: hellotest.azurecr.io/hello:latest
+        image: {{ registry }}/{{ namespace }}/{{ image }}:{{ version }}
         ports:
         - containerPort: 80

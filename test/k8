@@ -2,15 +2,8 @@
 
 parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 
-if [ ! -z "$VERSION" ]; then
-    echo "Testing version $VERSION"
-    uuid=$(uuidgen)
-    cat $parent_path/../deploy/hello-deployment.yml | sed -e 's/latest/$VERSION/g' > /tmp/$uuid.yml
-    kubectl replace -f /tmp/$uuid.yml
-    rm /tmp/$uuid.yml
-else
-    kubectl replace -f $parent_path/../deploy/hello-deployment.yml
-fi
+echo "Testing version $VERSION"
+$parent_path/../deploy/k8_deploy
 
 HELLO_IP=$(kubectl get services/hello -o json | jq -r '.status.loadBalancer.ingress[].ip')
 
