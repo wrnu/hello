@@ -5,6 +5,8 @@ parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 echo "Testing version $VERSION"
 $parent_path/../deploy/k8_deploy
 
+sleep 1
+
 HELLO_IP=$(kubectl get services/hello -o json | jq -r '.status.loadBalancer.ingress[].ip')
 
 # TEST GET

@@ -2,7 +2,9 @@
 
 echo "Testing version $VERSION"
 
-docker run --name $NAME -p 80:80 -d $NAME:$VERSION 2>&1 > /dev/null
+docker run --name test -p 80:80 -d $IMAGE:$VERSION 2>&1 > /dev/null
+
+sleep 1
 
 # Test GET
 result=$(curl -s http://localhost)
@@ -20,5 +22,5 @@ else
   echo POST: FAIL
 fi
 
-docker stop $NAME 2>&1 > /dev/null
-docker rm $NAME 2>&1 > /dev/null
+docker stop test 2>&1 > /dev/null
+docker rm test 2>&1 > /dev/null

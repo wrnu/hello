@@ -1,7 +1,6 @@
-NAME = hello
+IMAGE = wrnu/hello
 VERSION ?= latest
 DOCKER_REGISTRY ?= docker.io
-NS ?= wrnu
 
 .PHONY: all build test test_k8 tag push service release deploy
 
@@ -10,24 +9,24 @@ all: release deploy
 default: build
 
 build:
-	docker build -t $(NAME):$(VERSION) --rm .
+	docker build -t $(IMAGE):$(VERSION) --rm .
 
 test:
-	NAME=$(NAME) VERSION=$(VERSION) DOCKER_REGISTRY=$(DOCKER_REGISTRY) NS=$(NS) ./test/local
+	IMAGE=$(IMAGE) VERSION=$(VERSION) DOCKER_REGISTRY=$(DOCKER_REGISTRY) ./test/local
 
 test_k8:
-	env NAME=$(NAME) VERSION=$(VERSION) DOCKER_REGISTRY=$(DOCKER_REGISTRY) NS=$(NS) ./test/k8
+	env IMAGE=$(IMAGE) VERSION=$(VERSION) DOCKER_REGISTRY=$(DOCKER_REGISTRY) ./test/k8
 
 tag:
-	docker tag $(NAME):$(VERSION) $(DOCKER_REGISTRY)/$(NS)/$(NAME):$(VERSION)
+	docker tag $(IMAGE):$(VERSION) $(DOCKER_REGISTRY)/$(IMAGE):$(VERSION)
 
 push:
-	docker push $(DOCKER_REGISTRY)/$(NS)/$(NAME):$(VERSION)
+	docker push $(DOCKER_REGISTRY)/$(IMAGE):$(VERSION)
 
 service:
-	kubectl expose deployment $(NAME) --type="LoadBalancer"
+	kubectl expose deployment hello --type="LoadBalancer"
 
 release: build tag push 
 
 deploy:
-	env NAME=$(NAME) VERSION=$(VERSION) DOCKER_REGISTRY=$(DOCKER_REGISTRY) NS=$(NS) ./deploy/k8_deploy
+	env IMAGE=$(IMAGE) VERSION=$(VERSION) DOCKER_REGISTRY=$(DOCKER_REGISTRY) ./deploy/k8_deploy

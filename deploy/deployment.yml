@@ -1,16 +1,16 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: {{ image }}
+  name: hello
 spec:
   replicas: 4
   template:
     metadata:
       labels:
-        run: {{ image }}
+        run: hello
     spec:
       containers:
       - name: hello
-        image: {{ registry }}/{{ namespace }}/{{ image }}:{{ version }}
+        image: {{ registry }}/{{ image }}:{{ version }}
         ports:
         - containerPort: 80
