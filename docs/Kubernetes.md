@@ -137,7 +137,7 @@ e154057080f4: Layer already exists
 ```
 ### Deploy To Kubernetes
 
-[deploy/hello-deployment.yml](https://github.com/wrnu/hello/blob/dev/deploy/hello-deployment.yml)
+[deploy/hello-deployment.yml](https://github.com/wrnu/hello/blob/master/deploy/hello-deployment.yml)
 
 ```
 $ kubectl create -f deploy/hello-deployment.yml
