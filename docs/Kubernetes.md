@@ -176,7 +176,7 @@ http://192.168.99.100:30878
 
 ### Update App & deploy
 
-To update our app after a code change and re-deploy we follow the same steps above to build and push the docker image. Once we have our new image pushed to the registry we can deploy the change to the kubernetes cluster.
+To update our app after a code change we follow the same steps above to build and push the docker image. Once we have our new image pushed to the registry we can deploy the change to the kubernetes cluster.
 
 ```
 $ kubectl replace -f deploy/hello-deployment.yml
