@@ -36,9 +36,9 @@ e.g. systemctl start docker
 - [Glossary](https://docs.docker.com/glossary/?term=dockerfile)
 - [Docs](https://docs.docker.com/engine/reference/builder/)
 
-```
+**tl;dr**
+
 "A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image."
-```
 
 ```
 FROM golang:alpine
