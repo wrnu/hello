@@ -10,7 +10,6 @@ Requirements:
 * Kubectl
 * Hypervisor (Virtualbox, KVM, Hyper-V, VMware Fusion, xhyve)
 
-## Installation
 https://github.com/kubernetes/minikube
 
 ## Concepts

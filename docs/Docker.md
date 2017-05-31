@@ -14,6 +14,8 @@ https://www.docker.com/community-edition#/download
 
 A docker image built is from a Dockerfile, each layer corresponds to an instruction in the Dockerfile. Images are used by the docker engine (as a template) to create containers.
 
+Get list of images : `docker images`
+
 ### Container
 - [Glossary](https://docs.docker.com/glossary/?term=container)
 - [Docs](https://docs.docker.com/engine/userguide/storagedriver/imagesandcontainers/#container-and-layers)
@@ -22,10 +24,11 @@ A docker image built is from a Dockerfile, each layer corresponds to an instruct
 
 A container is an instance of a docker image. Containers are crated by the docker engine (runtime / daemon) by adding a writeable layer on top of the image.
 
+See running containers: `docker ps`
+See all containers (including stopped): `docker ps -a`
+
 ### Docker Client
 Docker client is the `docker` binary, it talks to the docker daemon. The docker daemon can be local or remote.
-
-e.g. docker ps
 
 ### Docker Daemon
 Docker daemon does the heavy lifting of building, running, and distributing your Docker containers.
@@ -54,7 +57,7 @@ ENTRYPOINT ["/app/hello"]
 
 `docker build` is used to create an image from a `Dockerfile`.
 
-e.g. `docker build -t wrnu/hello .`
+e.g. `docker build -t hello .`
 
 ### Repository
 - [Glossary](https://docs.docker.com/glossary/?term=repository)
@@ -71,6 +74,12 @@ A docker repository is like a git repository for docker images.
 **tl;dr**
 
 A docker registry is like a GitHub for docker images. A service that hosts image repositories.
+
+Tag and push to registry:
+```
+docker tag hello docker.io/wrnu/hello
+docker push wrnu/hello
+```
 
 ### Volume
 - [Glossary](https://docs.docker.com/glossary/?term=volume)
