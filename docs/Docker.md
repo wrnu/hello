@@ -7,18 +7,18 @@ https://www.docker.com/community-edition#/download
 ## Concepts
 
 ### Image
-[Glossary](https://docs.docker.com/glossary/?term=image)
-[Docs](https://docs.docker.com/engine/userguide/storagedriver/imagesandcontainers/#images-and-layers)
+- [Glossary](https://docs.docker.com/glossary/?term=image)
+- [Docs](https://docs.docker.com/engine/userguide/storagedriver/imagesandcontainers/#images-and-layers)
 
-tl;dr
+**tl;dr**
 
 A docker image built is from a Dockerfile, each layer corresponds to an instruction in the Dockerfile. Images are used by the docker engine (as a template) to create containers.
 
 ### Container
-[Glossary](https://docs.docker.com/glossary/?term=container)
-[Docs](https://docs.docker.com/engine/userguide/storagedriver/imagesandcontainers/#container-and-layers)
+- [Glossary](https://docs.docker.com/glossary/?term=container)
+- [Docs](https://docs.docker.com/engine/userguide/storagedriver/imagesandcontainers/#container-and-layers)
 
-tl;dr
+**tl;dr**
 
 A container is an instance of a docker image. Containers are crated by the docker engine (runtime / daemon) by adding a writeable layer on top of the image.
 
@@ -33,7 +33,8 @@ Docker daemon does the heavy lifting of building, running, and distributing your
 e.g. systemctl start docker
 
 ### Dockerfile
-[Docs](https://docs.docker.com/engine/reference/builder/)
+- [Glossary](https://docs.docker.com/glossary/?term=dockerfile)
+- [Docs](https://docs.docker.com/engine/reference/builder/)
 
 ```
 "A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image."
@@ -56,26 +57,26 @@ ENTRYPOINT ["/app/hello"]
 e.g. `docker build -t wrnu/hello .`
 
 ### Repository
-[Glossary](https://docs.docker.com/glossary/?term=repository)
-[Docs]
+- [Glossary](https://docs.docker.com/glossary/?term=repository)
+- [Docs](https://docs.docker.com/registry/)
 
-tl;dr
+**tl;dr**
 
 A docker repository is like a git repository for docker images.
 
 ### Registry
-[Glossary](https://docs.docker.com/glossary/?term=registry)
-[Docs](https://docs.docker.com/registry/)
+- [Glossary](https://docs.docker.com/glossary/?term=registry)
+- [Docs](https://docs.docker.com/registry/)
 
-tl;dr
+**tl;dr**
 
 A docker registry is like a GitHub for docker images. A service that hosts image repositories.
 
 ### Volume
-[Glossary](https://docs.docker.com/glossary/?term=volume)
-[Docs](https://docs.docker.com/engine/tutorials/dockervolumes/)
+- [Glossary](https://docs.docker.com/glossary/?term=volume)
+- [Docs](https://docs.docker.com/engine/tutorials/dockervolumes/)
 
-tl;dr
+**tl;dr**
 
 Volumes are used to persist data.
 
@@ -84,9 +85,9 @@ Volumes are used to persist data.
 A simple go web application that has two features:
 
 - GET on /
-..- “Hello world!”
-- POST on /
-..- “Hello POST_DATA world!”
+  - “Hello world!”
+- POST "POST_DATA" on /
+  - “Hello POST_DATA world!”
 
 https://github.com/wrnu/hello
 
