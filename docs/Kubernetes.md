@@ -4,7 +4,8 @@
 
 ## Architecture
 
-![kubernetes](https://en.wikipedia.org/wiki/File:Kubernetes.png "Kubernetes Architecture")
+![kubernetes](https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Kubernetes.png/600px-Kubernetes.png "Kubernetes Architecture")
+
 [Wikipedia](https://en.wikipedia.org/wiki/Kubernetes#Architecture)
 
 ## Local Install (Minikube)
