@@ -8,9 +8,15 @@ $parent_path/../deploy/k8_deploy
 sleep 1
 
 HELLO_IP=$(kubectl get services/hello -o json | jq -r '.status.loadBalancer.ingress[].ip')
+HELLO_HOST=$(kubectl get services/hello -o json | jq -r '.status.loadBalancer.ingress[].hostname')
+
+HELLO_URL="http://$HELLO_IP"
+if [[ "$HELLO_IP" = "null" ]]; then
+  HELLO_URL="http://$HELLO_HOST"
+fi
 
 # TEST GET
-result=$(curl -s http://$HELLO_IP)
+result=$(curl -s $HELLO_URL)
 if [[ $result == "Hello world!" ]]; then
   echo GET: PASS
 else
@@ -18,7 +24,7 @@ else
 fi
 
 # TEST POST
-result=$(curl -s -X POST --data "Testy McTestface" http://$HELLO_IP)
+result=$(curl -s -X POST --data "Testy McTestface" $HELLO_URL)
 if [[ $result == "Hello Testy McTestface world!" ]]; then
   echo POST: PASS
 else

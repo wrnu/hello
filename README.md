@@ -1,18 +1,5 @@
 # Kubernetes Hello World
 
-## Provison k8 Cluster
-
-```
-VERSION=prod # e.g. dev, test, demo, prod
-./deploy/az_create_k8_cluster $VERSION
-```
-
-## Activate k8 Cluster
-```
-# Activate 'prod'
-./deploy/az_k8_activate prod
-```
-
 ## Build and Push App To Registry
 ```
 # Builds local image
