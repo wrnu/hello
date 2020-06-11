@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ .Values.environment }}-{{ .Values.name }}"
+spec:
+  replicas: {{ .Values.replicas | default 1 }}
+  selector:
+    matchLabels:
+      app: "{{ .Values.environment }}-{{ .Values.name }}"
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: "{{ .Values.environment }}-{{ .Values.name }}"
+    spec:
+      containers:
+        - name: "{{ .Values.environment }}-{{ .Values.name }}"
+          image: "{{ .Values.imageName }}:{{ .Values.imageTag | default "latest" }}"
+          {{- if .Values.env }}
+          env:
+          {{- range $key, $val := .Values.env }}
+          - name: {{ $key }}
+            value: "{{ $val }}"
+          {{- end }}
+          {{- end }}
+          ports:
+            - containerPort: {{ .Values.targetPort }}
+          resources:
+            requests:
+              memory: 256Mi
+            limits:
+              memory: 256Mi

@@ -1,0 +1,7 @@
+name: hello-world
+namespace: p-0000-000
+imageName: wrnu/hello
+imageTag: latest
+port: 80
+targetPort: 80
+domain: usc1a.appno.co

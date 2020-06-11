@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: "{{ .Values.environment }}-{{ .Values.name }}"
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt
+  labels:
+    app: "{{ .Values.environment }}-{{ .Values.name }}"
+spec:
+  rules:
+  - host: "{{ .Values.environment }}-{{ .Values.name }}-{{ .Values.namespace }}.{{ .Values.domain }}"
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: "{{ .Values.environment }}-{{ .Values.name }}"
+          servicePort: {{ .Values.port }}
+  tls:
+  - secretName: "{{ .Values.environment }}-{{ .Values.name }}-letsencrypt-crt"
+    hosts:
+    - "{{ .Values.environment }}-{{ .Values.name }}-{{ .Values.namespace }}.{{ .Values.domain }}"

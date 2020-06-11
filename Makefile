@@ -1,8 +1,9 @@
 IMAGE = wrnu/hello
 VERSION ?= latest
 DOCKER_REGISTRY ?= docker.io
+NAMESPACE ?= default
 
-.PHONY: all build test test_k8 tag push service release deploy
+.PHONY: all build test tag push release deploy delete
 
 all: release deploy
 
@@ -14,19 +15,17 @@ build:
 test:
 	IMAGE=$(IMAGE) VERSION=$(VERSION) DOCKER_REGISTRY=$(DOCKER_REGISTRY) ./test/local
 
-test_k8:
-	env IMAGE=$(IMAGE) VERSION=$(VERSION) DOCKER_REGISTRY=$(DOCKER_REGISTRY) ./test/k8
-
 tag:
 	docker tag $(IMAGE):$(VERSION) $(DOCKER_REGISTRY)/$(IMAGE):$(VERSION)
 
 push:
 	docker push $(DOCKER_REGISTRY)/$(IMAGE):$(VERSION)
 
-service:
-	kubectl expose deployment hello --type="LoadBalancer"
-
 release: build tag push 
 
 deploy:
-	env IMAGE=$(IMAGE) VERSION=$(VERSION) DOCKER_REGISTRY=$(DOCKER_REGISTRY) ./deploy/k8_deploy
+	helm template -f helm/values.yaml --set imageName=$(IMAGE) --set imageTag=$(VERSION) --set environment=dev helm/ | kubectl apply -n $(NAMESPACE) -f -
+
+delete:
+	helm template -f helm/values.yaml --set imageName=$(IMAGE) --set imageTag=$(VERSION) --set environment=dev helm/ | kubectl delete -n $(NAMESPACE) -f -
+
